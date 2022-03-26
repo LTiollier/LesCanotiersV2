@@ -16,6 +16,7 @@ export default defineConfig({
             'react-dom',
             '@inertiajs/inertia',
             '@inertiajs/inertia-react',
+            '@inertiajs/progress',
             '@mui/material',
             '@mui/icons-material'
         ],

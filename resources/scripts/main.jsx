@@ -2,6 +2,9 @@ import React from 'react'
 import { createInertiaApp } from '@inertiajs/inertia-react'
 import { render } from 'react-dom'
 import BaseLayout from './layouts/BaseLayout'
+import { InertiaProgress } from '@inertiajs/progress'
+
+InertiaProgress.init()
 
 createInertiaApp({
     resolve: async (name) => {
