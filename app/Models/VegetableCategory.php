@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class VegetableCategory extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     public function vegetables(): HasMany

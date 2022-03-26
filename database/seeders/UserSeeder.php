@@ -9,8 +9,6 @@ class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -18,7 +16,7 @@ class UserSeeder extends Seeder
         $admin = User::factory()->create([
             'id' => 1,
             'name' => 'Admin User',
-            'email' => 'admin@gmail.com'
+            'email' => 'admin@gmail.com',
         ]);
 
         $admin->assignRole('admin');
@@ -27,7 +25,7 @@ class UserSeeder extends Seeder
         $employee = User::factory()->create([
             'id' => 2,
             'name' => 'Employee User',
-            'email' => 'employee@gmail.com'
+            'email' => 'employee@gmail.com',
         ]);
 
         $employee->assignRole('employee');

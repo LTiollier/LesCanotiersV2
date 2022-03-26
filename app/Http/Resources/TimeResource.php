@@ -14,12 +14,12 @@ class TimeResource extends JsonResource
     {
         return [
             'id' => $this->resource->getKey(),
-            'date'  => $this->resource->date,
-            'minutes'  => $this->resource->minutes,
+            'date' => $this->resource->date,
+            'minutes' => $this->resource->minutes,
             'quantity' => $this->resource->quantity,
-            'cycle'  => $this->whenLoaded('cycle', CycleResource::make($this->resource->cycle)),
-            'activity'  => $this->whenLoaded('activity', ActivityResource::make($this->resource->activity)),
-            'user'  => $this->whenLoaded('user', UserResource::make($this->resource->user)),
+            'cycle' => $this->whenLoaded('cycle', CycleResource::make($this->resource->cycle)),
+            'activity' => $this->whenLoaded('activity', ActivityResource::make($this->resource->activity)),
+            'user' => $this->whenLoaded('user', UserResource::make($this->resource->user)),
         ];
     }
 }

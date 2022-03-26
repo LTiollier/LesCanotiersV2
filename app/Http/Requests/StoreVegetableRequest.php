@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Vegetable;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Webmozart\Assert\Assert;
 
 class StoreVegetableRequest extends FormRequest
 {
@@ -15,6 +17,8 @@ class StoreVegetableRequest extends FormRequest
         ];
 
         if ($this->getMethod() == 'PUT') {
+            Assert::isInstanceOf($this->vegetable, Vegetable::class);
+
             $rules = array_merge($rules, [
                 'name' => [
                     'required',
@@ -22,7 +26,7 @@ class StoreVegetableRequest extends FormRequest
                     'max:100',
                     Rule::unique('vegetables', 'name')
                         ->ignore($this->vegetable->getKey(), $this->vegetable->getKeyName()),
-                ]
+                ],
             ]);
         }
         if ($this->getMethod() == 'POST') {
@@ -30,6 +34,7 @@ class StoreVegetableRequest extends FormRequest
                 'name' => 'required|unique:vegetables,name|string|max:100',
             ]);
         }
+
         return $rules;
     }
 }

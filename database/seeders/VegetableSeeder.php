@@ -9,8 +9,6 @@ class VegetableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
@@ -29,7 +27,7 @@ class VegetableSeeder extends Seeder
             'Oignon',
             'Poireau',
             'Epinard',
-            'Fenouil'
+            'Fenouil',
         ];
 
         $vegetableCategories = \App\Models\VegetableCategory::all();
@@ -37,7 +35,7 @@ class VegetableSeeder extends Seeder
         foreach ($vegetables as $vegetable) {
             Vegetable::factory([
                 'name' => $vegetable,
-                'vegetable_category_id' => $vegetableCategories->random()->getKey()
+                'vegetable_category_id' => $vegetableCategories->random()->getKey(),
             ])->create();
         }
     }

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Webmozart\Assert\Assert;
 
 class StoreUserRequest extends FormRequest
 {
@@ -15,11 +16,13 @@ class StoreUserRequest extends FormRequest
             'role' => [
                 'required',
                 'string',
-                Rule::in(array_keys(User::ROLES))
-            ]
+                Rule::in(array_keys(User::ROLES)),
+            ],
         ];
 
         if ($this->getMethod() == 'PUT') {
+            Assert::isInstanceOf($this->user, User::class);
+
             $rules = array_merge($rules, [
                 'password' => 'nullable|string|confirmed|min:6',
                 'email' => [
@@ -27,7 +30,7 @@ class StoreUserRequest extends FormRequest
                     'email',
                     Rule::unique('users', 'email')
                         ->ignore($this->user->getKey(), $this->user->getKeyName()),
-                ]
+                ],
             ]);
         }
         if ($this->getMethod() == 'POST') {

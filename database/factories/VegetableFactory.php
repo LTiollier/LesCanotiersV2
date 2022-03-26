@@ -24,7 +24,7 @@ class VegetableFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->name,
-            'vegetable_category_id' => VegetableCategory::factory()
+            'vegetable_category_id' => VegetableCategory::factory(),
         ];
     }
 }

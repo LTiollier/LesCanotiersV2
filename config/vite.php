@@ -60,7 +60,6 @@ return [
             // 'typescript:generate'
         ],
         'shell' => [
-            //
         ],
     ],
 

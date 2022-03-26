@@ -24,9 +24,9 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($data)) {
-           $request->session()->regenerate();
+            $request->session()->regenerate();
 
-           return redirect()->intended();
+            return redirect()->intended();
         }
 
         return back()->withErrors([

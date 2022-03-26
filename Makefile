@@ -1,6 +1,10 @@
+.PHONY: help
+
 #!make
 include .env
-export $(shell sed 's/=.*//' .env)
+
+help:
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sed 's/Makefile://' | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 #  fresh
 fresh:
@@ -14,28 +18,10 @@ reset:
 
 # test project
 test:
-    ./vendor/bin/sail artisan test --parallel
+	./vendor/bin/sail composer run phpcs
+	./vendor/bin/sail composer run phpstan
+	./vendor/bin/sail artisan test --parallel
 
-# Help instructions
-help:
-	@echo "\033[0;33mUsage:\033[0m"
-	@echo "     make [target]\n"
-	@echo "\033[0;33mAvailable targets:\033[0m"
-	@awk '/^[a-zA-Z\-\_0-9\.@]+:/ { \
-		returnMessage = match(n4line, /^# (.*)/); \
-		if (returnMessage) { \
-			printf "\n"; \
-			printf "     %s\n", n5line; \
-			printf "     %s\n", n4line; \
-			printf "     %s\n", n3line; \
-			printf "\n"; \
-		} \
-		helpMessage = match(lastLine, /^## (.*)/); \
-		if (helpMessage) { \
-			helpCommand = substr($$1, 0, index($$1, ":")); \
-			helpMessage = substr(lastLine, RSTART + 3, RLENGTH); \
-			printf "     \033[0;32m%-22s\033[0m %s\n", helpCommand, helpMessage; \
-		} \
-	} \
-	{ n5line = n4line; n4line = n3line; n3line = n2line; n2line = lastLine; lastLine = $$0;}' $(MAKEFILE_LIST)
-	@echo ""
+# Style fix
+style:
+	./vendor/bin/sail composer run style:fix

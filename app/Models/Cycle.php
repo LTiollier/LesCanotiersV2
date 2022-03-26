@@ -10,13 +10,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cycle extends Model
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'starts_at',
         'ends_at',
         'vegetable_id',
-        'parcel_id'
+        'parcel_id',
     ];
 
     public function vegetable(): BelongsTo

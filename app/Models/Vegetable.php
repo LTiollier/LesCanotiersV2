@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vegetable extends Model
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'name',
-        'vegetable_category_id'
+        'vegetable_category_id',
     ];
 
     public function vegetableCategory(): BelongsTo

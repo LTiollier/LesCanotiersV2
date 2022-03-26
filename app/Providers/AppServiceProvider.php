@@ -8,22 +8,11 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
     public function register()
     {
-        //
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
         ParallelTesting::setUpTestDatabase(function ($database, $token) {
             Artisan::call('db:seed --class=TestDatabaseSeeder');
