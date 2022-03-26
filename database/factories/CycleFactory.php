@@ -2,17 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Cycle;
+use App\Models\Parcel;
+use App\Models\Vegetable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserFactory extends Factory
+class CycleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Cycle::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +24,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'email_verified_at' => now(),
-            'password' => 'password',
+            'starts_at' => $this->faker->date(),
+            'ends_at' => $this->faker->date(),
+            'vegetable_id' => Vegetable::factory(),
+            'parcel_id' => Parcel::factory(),
         ];
     }
 }
