@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-20.04
     name: "CI site Les Canotiers V2"
     env:
+      DB_CONNECTION: mysql
       DB_DATABASE: laravel
       DB_USERNAME: root
       DB_PASSWORD: password
