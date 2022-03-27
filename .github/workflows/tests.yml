@@ -33,6 +33,9 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Start mysql service
+        run: sudo systemctl start mysql
+
       - uses: actions/checkout@v2
 
       - name: Get Composer Cache Directory
