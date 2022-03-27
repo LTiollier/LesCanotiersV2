@@ -1,0 +1,74 @@
+name: tests
+on: [push]
+jobs:
+  tests:
+    runs-on: ubuntu-20.04
+    name: "CI site Les Canotiers V2"
+    steps:
+      # Setup
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer:v2, cs2pr
+          coverage: none
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - uses: actions/checkout@v2
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      # Preparing environment
+      - name: Copy .env file
+        run: cp .env.ci .env
+
+      - name: Installation du projet (database)
+        run: |
+          composer install
+          php artisan key:generate
+          php artisan migrate:fresh --seed
+          php artisan optimize:clear
+
+      - name: Execute style fix
+        run: composer run style:fix || true
+
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "dev@ltiollier.fr"
+
+      - name: commit
+        run: |
+          git add -u
+          (git commit -m ":art: Auto style fix" && git push origin) || true
+
+      - name: Running phpstan
+        run: bin/phpstan --memory-limit=-1
+
+      - name: Verification des coding standards
+        run: bin/phpcs
+
+      - name: Installation du projet (npm)
+        run: |
+          yarn
+          yarn build
+
+      - name: Running phpunit
+        run: php artisan test --parallel
+
+      - name: Refresh database
+        run: php artisan migrate:refresh --seed
