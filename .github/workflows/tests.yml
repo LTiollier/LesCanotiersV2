@@ -4,21 +4,6 @@ jobs:
   tests:
     runs-on: ubuntu-20.04
     name: "CI site Les Canotiers V2"
-    env:
-      DB_CONNECTION: mysql
-      DB_DATABASE: laravel
-      DB_USERNAME: root
-      DB_PASSWORD: password
-    services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: false
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: laravel
-        ports:
-          - 3306/tcp
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       # Setup
       - name: Setup PHP
@@ -33,8 +18,8 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Start mysql service
-        run: sudo systemctl start mysql
+      - name: Create Database
+        run: touch database/database.sqlite
 
       - uses: actions/checkout@v2
 
