@@ -3,7 +3,17 @@ on: [push]
 jobs:
   tests:
     runs-on: ubuntu-20.04
-    name: "CI site Les Canotiers V2"
+    name: "CI Les Canotiers V2"
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: lescanotiers
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       # Setup
       - name: Setup PHP
@@ -18,8 +28,8 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Create Database
-        run: touch ./database/database.sqlite
+      - name: Start mysql service
+        run: sudo systemctl start mysql
 
       - uses: actions/checkout@v2
 
@@ -35,11 +45,25 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-composer-
 
+      - uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       # Preparing environment
       - name: Copy .env file
         run: cp .env.ci .env
 
       - name: Installation du projet (database)
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
         run: |
           composer install
           php artisan key:generate
@@ -60,10 +84,10 @@ jobs:
           (git commit -m ":art: Auto style fix" && git push origin) || true
 
       - name: Running phpstan
-        run: bin/phpstan --memory-limit=-1
+        run: composer run phpstan
 
       - name: Verification des coding standards
-        run: bin/phpcs
+        run: composer run phpcs
 
       - name: Installation du projet (npm)
         run: |
@@ -71,7 +95,11 @@ jobs:
           yarn build
 
       - name: Running phpunit
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
         run: php artisan test --parallel
 
       - name: Refresh database
+        env:
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
         run: php artisan migrate:refresh --seed
