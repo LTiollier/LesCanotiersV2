@@ -1,0 +1,4 @@
+CREATE DATABASE IF NOT EXISTS `lescanotiers_test` COLLATE 'utf8_general_ci';
+GRANT ALL PRIVILEGES ON *.* TO 'sail'@'%';
+
+FLUSH PRIVILEGES;

@@ -26,7 +26,7 @@ class LoginController extends Controller
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
 
-            return redirect()->intended();
+            return redirect()->route('times.create');
         }
 
         return back()->withErrors([

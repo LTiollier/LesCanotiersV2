@@ -17,6 +17,7 @@ install:
 #  fresh
 fresh:
 	./vendor/bin/sail artisan migrate:fresh --seed
+	./vendor/bin/sail artisan migrate:fresh --seed --env testing
 
 # reset project
 reset:
@@ -28,6 +29,10 @@ reset:
 test:
 	./vendor/bin/sail composer run phpcs
 	./vendor/bin/sail composer run phpstan
+	./vendor/bin/sail artisan test --parallel
+
+# test pest only
+test_only:
 	./vendor/bin/sail artisan test --parallel
 
 # Style fix

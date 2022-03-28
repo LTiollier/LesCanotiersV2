@@ -14,8 +14,5 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        ParallelTesting::setUpTestDatabase(function ($database, $token) {
-            Artisan::call('db:seed --class=TestDatabaseSeeder');
-        });
     }
 }

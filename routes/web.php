@@ -17,5 +17,5 @@ Route::controller(LoginController::class)->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         dd('coucou');
-    });
+    })->name('times.create');
 });
