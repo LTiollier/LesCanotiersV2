@@ -1,8 +1,5 @@
 <?php
 
-const LOGIN = 'login';
-const DASHBOARD = 'times.create';
-
 it('asserts we can access to login page', function () {
     $this->get(route('login'))
         ->assertSuccessful()
@@ -27,7 +24,7 @@ it('asserts we receive cannot login with wrong password', function () {
 
 it('asserts we can login and redirect to dashboard', function () {
     $this->post(route('login'), ['email' => 'admin@gmail.com', 'password' => 'password'])
-        ->assertRedirect(route(DASHBOARD))
+        ->assertRedirect(route('times.create'))
     ;
 
     $this->assertAuthenticated();

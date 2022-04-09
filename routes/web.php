@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(LoginController::class)->group(function () {
@@ -14,8 +15,9 @@ Route::controller(LoginController::class)->group(function () {
     ;
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        dd('coucou');
-    })->name('times.create');
-});
+Route::resources([
+    'times' => TimeController::class
+], [
+    'except' => ['show'],
+    'middleware' => ['auth']
+]);

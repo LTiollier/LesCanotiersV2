@@ -35,6 +35,10 @@ test:
 test_only:
 	./vendor/bin/sail artisan test --parallel
 
+# test pest only with recreate databases
+test_recreate:
+	./vendor/bin/sail artisan test --parallel --recreate-databases
+
 # Style fix
 style:
 	./vendor/bin/sail composer run style:fix

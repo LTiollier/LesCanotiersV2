@@ -15,10 +15,8 @@ class VegetableResource extends JsonResource
         return [
             'id' => $this->resource->getKey(),
             'name' => $this->resource->name,
-            'cycles' => $this->whenLoaded('cycles', CycleResource::collection($this->resource->cycles)),
-            'vegetable_category' => $this->whenLoaded('vegetableCategory', VegetableCategoryResource::make(
-                $this->resource->vegetableCategory
-            )),
+            'cycles' => CycleResource::collection($this->whenLoaded('cycles')),
+            'vegetable_category' => VegetableCategoryResource::make($this->whenLoaded('vegetableCategory')),
         ];
     }
 }

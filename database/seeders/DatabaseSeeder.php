@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ParcelSeeder::class);
         $this->call(ActivitySeeder::class);
         $this->call(CycleSeeder::class);
+        $this->call(TimeSeeder::class);
     }
 }

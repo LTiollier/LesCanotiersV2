@@ -11,6 +11,10 @@
 |
 */
 
+use App\Models\User;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Tests\TestCase;
+
 uses(Tests\TestCase::class)->in('Feature');
 
 /*
@@ -24,10 +28,6 @@ uses(Tests\TestCase::class)->in('Feature');
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
-
 /*
 |--------------------------------------------------------------------------
 | Functions
@@ -39,7 +39,16 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function actingAsAdmin(Authenticatable $user = null): TestCase
 {
-    // ..
+    $user = $user ?: User::find(1);
+
+    return test()->actingAs($user);
+}
+
+function actingAsEmployee(Authenticatable $user = null): TestCase
+{
+    $user = $user ?: User::find(2);
+
+    return test()->actingAs($user);
 }
