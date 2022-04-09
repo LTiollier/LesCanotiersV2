@@ -16,8 +16,8 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 Route::resources([
-    'times' => TimeController::class
+    'times' => TimeController::class,
 ], [
     'except' => ['show'],
-    'middleware' => ['auth']
+    'middleware' => ['auth'],
 ]);

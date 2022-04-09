@@ -37,7 +37,7 @@ class TimeController extends Controller
     {
         return Inertia::render('Time/TimeCreate', [
             'cycles' => CycleResource::collection($this->cycleRepository->getFromNow()),
-            'activities' => ActivityResource::collection($this->activityRepository->all())
+            'activities' => ActivityResource::collection($this->activityRepository->all()),
         ]);
     }
 
@@ -53,7 +53,6 @@ class TimeController extends Controller
         if (Arr::get($parameters, 'activity.id', null)) {
             $parameters['activity_id'] = Arr::get($parameters, 'activity.id', null);
         }
-
 
         if (Arr::get($parameters, 'user.id', null)) {
             $parameters['user_id'] = Arr::get($parameters, 'user.id', null);
@@ -76,7 +75,7 @@ class TimeController extends Controller
         return Inertia::render('Time/TimeEdit', [
             'time' => TimeResource::make($time),
             'cycles' => CycleResource::collection($this->cycleRepository->getFromNow()),
-            'activities' => ActivityResource::collection($this->activityRepository->all())
+            'activities' => ActivityResource::collection($this->activityRepository->all()),
         ]);
     }
 

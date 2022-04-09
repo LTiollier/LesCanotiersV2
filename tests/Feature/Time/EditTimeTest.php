@@ -4,7 +4,7 @@ use function Pest\Laravel\get;
 
 it('asserts we cannot see edit unauthenticated', function () {
     get(route('times.edit', ['time' => 1]))
-        ->assertRedirect(route('login'));
+        ->assertRedirect(route('login'))
     ;
 });
 

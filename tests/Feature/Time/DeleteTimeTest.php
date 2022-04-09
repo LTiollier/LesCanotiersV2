@@ -1,11 +1,10 @@
 <?php
 
-use function Pest\Laravel\get;
 use function Pest\Laravel\delete;
 
 it('asserts we cannot delete unauthenticated', function () {
     delete(route('times.destroy', ['time' => 1]))
-        ->assertRedirect(route('login'));
+        ->assertRedirect(route('login'))
     ;
 });
 

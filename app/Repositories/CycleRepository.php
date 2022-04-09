@@ -15,7 +15,8 @@ class CycleRepository
     {
         return $this->model
             ->with($relations)
-            ->get();
+            ->get()
+        ;
     }
 
     public function getFromNow(): Collection
@@ -25,20 +26,24 @@ class CycleRepository
         return $this->model
             ->where(function ($query) use ($now) {
                 $query->whereDate('starts_at', '<=', $now)
-                    ->whereDate('ends_at', '>=', $now);
+                    ->whereDate('ends_at', '>=', $now)
+                ;
             })->orWhere(function ($query) use ($now) {
                 $query->whereDate('starts_at', '<=', $now)
-                    ->whereNull('ends_at');
+                    ->whereNull('ends_at')
+                ;
             })
             ->with(['vegetable', 'parcel'])
-            ->get();
+            ->get()
+        ;
     }
 
     public function store(array $parameters): Cycle
     {
         $model = $this->model->newInstance();
         $model->fill($parameters)
-            ->save();
+            ->save()
+        ;
 
         return $model;
     }
@@ -47,7 +52,8 @@ class CycleRepository
     {
         $cycle
             ->fill($parameters)
-            ->save();
+            ->save()
+        ;
 
         return $cycle;
     }

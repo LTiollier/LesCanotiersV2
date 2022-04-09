@@ -17,7 +17,7 @@ class HandleInertiaRequests extends Middleware
                     'label' => 'Home',
                     'url' => route('times.create', [], false),
                 ],
-            ]
+            ],
         ]);
     }
 }

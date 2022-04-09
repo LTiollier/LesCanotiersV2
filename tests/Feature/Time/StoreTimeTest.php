@@ -1,7 +1,7 @@
 <?php
 
-use function Pest\Laravel\post;
 use function Pest\Laravel\followingRedirects;
+use function Pest\Laravel\post;
 
 $data = [
     'minutes' => 125,
@@ -20,7 +20,7 @@ $data = [
 
 it('asserts we cannot see store unauthenticated', function () use ($data) {
     post(route('times.store'), $data)
-        ->assertRedirect(route('login'));
+        ->assertRedirect(route('login'))
     ;
 });
 

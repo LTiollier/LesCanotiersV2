@@ -1,7 +1,7 @@
 <?php
 
-use function Pest\Laravel\put;
 use function Pest\Laravel\followingRedirects;
+use function Pest\Laravel\put;
 
 $data = [
     'minutes' => 1,
@@ -11,7 +11,7 @@ $data = [
 
 it('asserts we cannot update unauthenticated', function () {
     put(route('times.update', ['time' => 1]))
-        ->assertRedirect(route('login'));
+        ->assertRedirect(route('login'))
     ;
 });
 

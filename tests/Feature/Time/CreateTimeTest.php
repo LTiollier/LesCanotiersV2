@@ -4,7 +4,7 @@ use function Pest\Laravel\get;
 
 it('asserts we cannot see create unauthenticated', function () {
     get(route('times.create'))
-        ->assertRedirect(route('login'));
+        ->assertRedirect(route('login'))
     ;
 });
 
