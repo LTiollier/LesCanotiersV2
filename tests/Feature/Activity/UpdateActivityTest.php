@@ -4,7 +4,7 @@ use function Pest\Laravel\followingRedirects;
 use function Pest\Laravel\put;
 
 $data = [
-    'name' => 'eee'
+    'name' => 'eee',
 ];
 
 it('asserts we cannot update unauthenticated', function () {
@@ -22,7 +22,7 @@ it('asserts admin can update', function () use ($data) {
     ;
 
     $this->assertDatabaseHas('activities', [
-        'name' => 'eee'
+        'name' => 'eee',
     ]);
 });
 
