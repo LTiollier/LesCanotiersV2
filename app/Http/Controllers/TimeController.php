@@ -11,6 +11,7 @@ use App\Models\Time;
 use App\Repositories\ActivityRepository;
 use App\Repositories\CycleRepository;
 use App\Repositories\TimeRepository;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Inertia\Inertia;
@@ -26,25 +27,40 @@ class TimeController extends Controller
     ) {
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function index(): Response
     {
+        $this->authorize('viewAny', Time::class);
+
         return Inertia::render('Time/TimeIndex', [
             'times' => $this->timeRepository->all(),
         ]);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function create(): Response
     {
+        $this->authorize('create', Time::class);
+
         return Inertia::render('Time/TimeCreate', [
             'cycles' => CycleResource::collection($this->cycleRepository->getFromNow()),
             'activities' => ActivityResource::collection($this->activityRepository->all()),
         ]);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function store(StoreTimeRequest $request): RedirectResponse
     {
         $parameters = $request->validated();
         Assert::isArray($parameters);
+
+        $this->authorize('store', [Time::class, $parameters]);
 
         if (Arr::get($parameters, 'cycle.id', null)) {
             $parameters['cycle_id'] = Arr::get($parameters, 'cycle.id', null);
@@ -63,8 +79,13 @@ class TimeController extends Controller
         return redirect()->route('times.index');
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function edit(Time $time): Response
     {
+        $this->authorize('edit', $time);
+
         $time->load([
             'activity',
             'user',
@@ -79,10 +100,15 @@ class TimeController extends Controller
         ]);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update(Time $time, UpdateTimeRequest $request): RedirectResponse
     {
         $parameters = $request->validated();
         Assert::isArray($parameters);
+
+        $this->authorize('update', [$time, $parameters]);
 
         $this->timeRepository->update($time, $parameters);
 
@@ -94,6 +120,8 @@ class TimeController extends Controller
      */
     public function destroy(Time $time): RedirectResponse
     {
+        $this->authorize('delete', $time);
+
         $this->timeRepository->delete($time);
 
         return redirect()->route('times.index');

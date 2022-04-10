@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Activity;
+use Illuminate\Support\Collection;
 
 class ActivityRepository
 {
@@ -10,10 +11,7 @@ class ActivityRepository
     {
     }
 
-    /**
-     * @param array<string> $relations
-     */
-    public function all(array $relations = []): \Illuminate\Support\Collection
+    public function all(array $relations = []): Collection
     {
         return $this->model
             ->with($relations)
@@ -21,9 +19,6 @@ class ActivityRepository
         ;
     }
 
-    /**
-     * @param array<mixed> $parameters
-     */
     public function store(array $parameters): Activity
     {
         $model = $this->model->newInstance();
@@ -34,9 +29,6 @@ class ActivityRepository
         return $model;
     }
 
-    /**
-     * @param array<mixed> $parameters
-     */
     public function update(Activity $activity, array $parameters): Activity
     {
         $activity

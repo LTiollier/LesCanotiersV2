@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::resources([
     'times' => TimeController::class,
+    'activities' => ActivityController::class,
 ], [
     'except' => ['show'],
     'middleware' => ['auth'],

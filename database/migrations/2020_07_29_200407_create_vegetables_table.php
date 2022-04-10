@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\VegetableCategory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +14,10 @@ return new class() extends Migration {
         Schema::create('vegetables', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->unsignedBigInteger('vegetable_category_id')->nullable();
-            $table->foreign('vegetable_category_id')->references('id')->on('vegetable_categories');
+            $table->foreignIdFor(VegetableCategory::class)
+                ->nullable()
+                ->constrained()
+            ;
             $table->timestamps();
             $table->softDeletes();
         });

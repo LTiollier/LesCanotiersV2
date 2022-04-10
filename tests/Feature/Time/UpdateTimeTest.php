@@ -35,14 +35,39 @@ it('asserts employee can update', function () use ($data) {
     followingRedirects();
 
     actingAsEmployee()
-        ->put(route('times.update', ['time' => 1]), $data)
+        ->put(route('times.update', ['time' => 2]), $data)
         ->assertOk()
     ;
 
     $this->assertDatabaseHas('times', [
-        'id' => 1,
+        'id' => 2,
         'minutes' => 1,
         'date' => '1111-01-02',
         'quantity' => 1,
     ]);
+});
+
+it('asserts admin can update other', function () use ($data) {
+    followingRedirects();
+
+    actingAsAdmin()
+        ->put(route('times.update', ['time' => 2]), $data)
+        ->assertOk()
+    ;
+
+    $this->assertDatabaseHas('times', [
+        'id' => 2,
+        'minutes' => 1,
+        'date' => '1111-01-02',
+        'quantity' => 1,
+    ]);
+});
+
+it('asserts employee cannot update other', function () use ($data) {
+    followingRedirects();
+
+    actingAsEmployee()
+        ->put(route('times.update', ['time' => 1]), $data)
+        ->assertForbidden()
+    ;
 });

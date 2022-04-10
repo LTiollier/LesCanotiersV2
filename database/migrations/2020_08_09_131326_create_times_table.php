@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Activity;
+use App\Models\Cycle;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,16 +18,18 @@ return new class() extends Migration {
             $table->integer('minutes');
             $table->date('date');
             $table->integer('quantity')->nullable();
-
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
-
-            $table->unsignedBigInteger('cycle_id')->nullable();
-            $table->foreign('cycle_id')->references('id')->on('cycles')->onDelete('cascade');
-
-            $table->unsignedBigInteger('activity_id')->nullable();
-            $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');
-
+            $table->foreignIdFor(User::class)
+                ->nullable()
+                ->constrained()
+            ;
+            $table->foreignIdFor(Cycle::class)
+                ->nullable()
+                ->constrained()
+            ;
+            $table->foreignIdFor(Activity::class)
+                ->nullable()
+                ->constrained()
+            ;
             $table->timestamps();
             $table->softDeletes();
         });
