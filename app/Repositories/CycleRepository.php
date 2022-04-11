@@ -58,9 +58,6 @@ class CycleRepository
         return $cycle;
     }
 
-    /**
-     * @throws \Exception
-     */
     public function delete(Cycle $cycle): bool
     {
         return (bool) $cycle->delete();

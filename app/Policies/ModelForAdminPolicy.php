@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies\Abstracts;
+namespace App\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Database\Eloquent\Model;
 
-abstract class ModelAdminPolicyAbstract
+class ModelForAdminPolicy
 {
     use HandlesAuthorization;
 

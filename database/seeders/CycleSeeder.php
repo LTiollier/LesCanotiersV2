@@ -16,6 +16,7 @@ class CycleSeeder extends Seeder
 
         for ($i = 1; $i <= 10; ++$i) {
             \App\Models\Cycle::factory([
+                'id' => $i,
                 'starts_at' => now()->subMonth(),
                 'ends_at' => now()->addMonth(),
                 'vegetable_id' => $vegetables->random()->getKey(),
