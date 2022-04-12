@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CycleController;
+use App\Http\Controllers\ParcelController;
 use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ Route::resources([
     'times' => TimeController::class,
     'activities' => ActivityController::class,
     'cycles' => CycleController::class,
+    'parcels' => ParcelController::class,
 ], [
     'except' => ['show'],
     'middleware' => ['auth'],

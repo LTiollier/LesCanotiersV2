@@ -45,10 +45,10 @@ class ActivityController extends Controller
      */
     public function store(StoreActivityRequest $request): RedirectResponse
     {
+        $this->authorize('store', Activity::class);
+
         $parameters = $request->validated();
         Assert::isArray($parameters);
-
-        $this->authorize('store', Activity::class);
 
         $this->activityRepository->store($parameters);
 
@@ -72,10 +72,10 @@ class ActivityController extends Controller
      */
     public function update(Activity $activity, StoreActivityRequest $request): RedirectResponse
     {
+        $this->authorize('update', $activity);
+
         $parameters = $request->validated();
         Assert::isArray($parameters);
-
-        $this->authorize('update', $activity);
 
         $this->activityRepository->update($activity, $parameters);
 

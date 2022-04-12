@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Activity;
 use App\Models\Cycle;
+use App\Models\Parcel;
 use App\Models\Time;
 use App\Policies\ModelForAdminPolicy;
 use App\Policies\TimePolicy;
@@ -15,6 +16,7 @@ class AuthServiceProvider extends ServiceProvider
         Time::class => TimePolicy::class,
         Activity::class => ModelForAdminPolicy::class,
         Cycle::class => ModelForAdminPolicy::class,
+        Parcel::class => ModelForAdminPolicy::class,
     ];
 
     public function boot(): void
