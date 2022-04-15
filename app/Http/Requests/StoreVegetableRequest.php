@@ -12,8 +12,7 @@ class StoreVegetableRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'vegetable_category' => 'required|array',
-            'vegetable_category.id' => 'required|exists:vegetable_categories,id',
+            'vegetable_category_id' => 'required|exists:vegetable_categories,id',
         ];
 
         if ($this->getMethod() == 'PUT') {

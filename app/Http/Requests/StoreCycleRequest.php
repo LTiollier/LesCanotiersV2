@@ -11,10 +11,8 @@ class StoreCycleRequest extends FormRequest
         return [
             'starts_at' => 'required|date',
             'ends_at' => 'nullable|date',
-            'vegetable' => 'array',
-            'vegetable.id' => 'required|exists:vegetables,id',
-            'parcel' => 'array',
-            'parcel.id' => 'required|exists:parcels,id',
+            'vegetable_id' => 'required|exists:vegetables,id',
+            'parcel_id' => 'required|exists:parcels,id',
         ];
     }
 }

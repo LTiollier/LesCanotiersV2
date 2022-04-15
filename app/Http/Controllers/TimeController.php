@@ -62,18 +62,6 @@ class TimeController extends Controller
 
         $this->authorize('store', [Time::class, $parameters]);
 
-        if (Arr::get($parameters, 'cycle.id', null)) {
-            $parameters['cycle_id'] = Arr::get($parameters, 'cycle.id', null);
-        }
-
-        if (Arr::get($parameters, 'activity.id', null)) {
-            $parameters['activity_id'] = Arr::get($parameters, 'activity.id', null);
-        }
-
-        if (Arr::get($parameters, 'user.id', null)) {
-            $parameters['user_id'] = Arr::get($parameters, 'user.id', null);
-        }
-
         $this->timeRepository->store($parameters);
 
         return redirect()->route('times.index');

@@ -12,12 +12,9 @@ class StoreTimeRequest extends FormRequest
             'minutes' => 'required|integer',
             'date' => 'required|date',
             'quantity' => 'nullable|integer',
-            'cycle' => 'array',
-            'cycle.id' => 'required|exists:cycles,id',
-            'activity' => 'array',
-            'activity.id' => 'required|exists:activities,id',
-            'user' => 'array',
-            'user.id' => 'required|exists:users,id',
+            'cycle_id' => 'required|exists:cycles,id',
+            'activity_id' => 'required|exists:activities,id',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 }

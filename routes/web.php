@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\ParcelController;
 use App\Http\Controllers\TimeController;
+use App\Http\Controllers\VegetableController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(LoginController::class)->group(function () {
@@ -23,6 +24,7 @@ Route::resources([
     'activities' => ActivityController::class,
     'cycles' => CycleController::class,
     'parcels' => ParcelController::class,
+    'vegetables' => VegetableController::class,
 ], [
     'except' => ['show'],
     'middleware' => ['auth'],

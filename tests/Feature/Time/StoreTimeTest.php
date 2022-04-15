@@ -7,19 +7,13 @@ $dataAdmin = [
     'minutes' => 125,
     'date' => '1111-01-01',
     'quantity' => 20,
-    'cycle' => [
-        'id' => 1,
-    ],
-    'activity' => [
-        'id' => 1,
-    ],
-    'user' => [
-        'id' => 1,
-    ],
+    'cycle_id' => 1,
+    'activity_id' => 1,
+    'user_id' => 1,
 ];
 
 $dataEmployee = $dataAdmin;
-$dataEmployee['user']['id'] = 2;
+$dataEmployee['user_id'] = 2;
 
 it('asserts we cannot see store unauthenticated', function () use ($dataAdmin) {
     post(route('times.store'), $dataAdmin)
@@ -35,14 +29,7 @@ it('asserts admin can store', function () use ($dataAdmin) {
         ->assertOk()
     ;
 
-    $this->assertDatabaseHas('times', [
-        'minutes' => 125,
-        'date' => '1111-01-01',
-        'quantity' => 20,
-        'cycle_id' => 1,
-        'activity_id' => 1,
-        'user_id' => 1,
-    ]);
+    $this->assertDatabaseHas('times', $dataAdmin);
 });
 
 it('asserts employee can store', function () use ($dataEmployee) {
@@ -53,14 +40,7 @@ it('asserts employee can store', function () use ($dataEmployee) {
         ->assertOk()
     ;
 
-    $this->assertDatabaseHas('times', [
-        'minutes' => 125,
-        'date' => '1111-01-01',
-        'quantity' => 20,
-        'cycle_id' => 1,
-        'activity_id' => 1,
-        'user_id' => 2,
-    ]);
+    $this->assertDatabaseHas('times', $dataEmployee);
 });
 
 it('asserts admin can store other', function () use ($dataEmployee) {
@@ -71,14 +51,7 @@ it('asserts admin can store other', function () use ($dataEmployee) {
         ->assertOk()
     ;
 
-    $this->assertDatabaseHas('times', [
-        'minutes' => 125,
-        'date' => '1111-01-01',
-        'quantity' => 20,
-        'cycle_id' => 1,
-        'activity_id' => 1,
-        'user_id' => 2,
-    ]);
+    $this->assertDatabaseHas('times', $dataEmployee);
 });
 
 it('asserts employee cannot store other', function () use ($dataAdmin) {

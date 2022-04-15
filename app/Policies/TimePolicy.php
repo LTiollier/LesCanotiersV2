@@ -26,7 +26,7 @@ class TimePolicy
             return true;
         }
 
-        return $user->getKey() === data_get($data, 'user.id');
+        return $user->getKey() === data_get($data, 'user_id');
     }
 
     public function edit(User $user, Time $time): bool

@@ -61,14 +61,6 @@ class CycleController extends Controller
         $parameters = $request->validated();
         Assert::isArray($parameters);
 
-        if (Arr::get($parameters, 'vegetable.id', null)) {
-            $parameters['vegetable_id'] = Arr::get($parameters, 'vegetable.id', null);
-        }
-
-        if (Arr::get($parameters, 'parcel.id', null)) {
-            $parameters['parcel_id'] = Arr::get($parameters, 'parcel.id', null);
-        }
-
         $this->cycleRepository->store($parameters);
 
         return redirect()->route('cycles.index');
@@ -103,14 +95,6 @@ class CycleController extends Controller
 
         $parameters = $request->validated();
         Assert::isArray($parameters);
-
-        if (Arr::get($parameters, 'vegetable.id', null)) {
-            $parameters['vegetable_id'] = Arr::get($parameters, 'vegetable.id', null);
-        }
-
-        if (Arr::get($parameters, 'parcel.id', null)) {
-            $parameters['parcel_id'] = Arr::get($parameters, 'parcel.id', null);
-        }
 
         $this->cycleRepository->update($cycle, $parameters);
 
