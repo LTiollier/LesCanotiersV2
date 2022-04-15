@@ -42,7 +42,7 @@ class VegetableController extends Controller
         $this->authorize('create', Vegetable::class);
 
         return Inertia::render('Vegetable/VegetableCreate', [
-            'vegetableCategories' => VegetableCategoryResource::collection($this->vegetableCategoryRepository->all())
+            'vegetableCategories' => VegetableCategoryResource::collection($this->vegetableCategoryRepository->all()),
         ]);
     }
 
@@ -72,7 +72,7 @@ class VegetableController extends Controller
 
         return Inertia::render('Vegetable/VegetableEdit', [
             'vegetable' => VegetableResource::make($vegetable),
-            'vegetableCategories' => VegetableCategoryResource::collection($this->vegetableCategoryRepository->all())
+            'vegetableCategories' => VegetableCategoryResource::collection($this->vegetableCategoryRepository->all()),
         ]);
     }
 

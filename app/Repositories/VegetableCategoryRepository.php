@@ -12,38 +12,37 @@ class VegetableCategoryRepository
 
     /**
      * @param array<string> $relations
-     * @return \Illuminate\Support\Collection
      */
     public function all(array $relations = []): \Illuminate\Support\Collection
     {
         return $this->model
             ->with($relations)
-            ->get();
+            ->get()
+        ;
     }
 
     /**
      * @param array<mixed> $parameters
-     * @return VegetableCategory
      */
     public function store(array $parameters): VegetableCategory
     {
         $model = $this->model->newInstance();
         $model->fill($parameters)
-            ->save();
+            ->save()
+        ;
 
         return $model;
     }
 
     /**
-     * @param VegetableCategory $vegetableCategory
      * @param array<mixed> $parameters
-     * @return VegetableCategory
      */
     public function update(VegetableCategory $vegetableCategory, array $parameters): VegetableCategory
     {
         $vegetableCategory
             ->fill($parameters)
-            ->save();
+            ->save()
+        ;
 
         return $vegetableCategory;
     }
