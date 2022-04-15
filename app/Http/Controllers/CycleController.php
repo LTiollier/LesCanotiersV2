@@ -19,9 +19,9 @@ use Webmozart\Assert\Assert;
 class CycleController extends Controller
 {
     public function __construct(
-        private CycleRepository $cycleRepository,
-        private VegetableRepository $vegetableRepository,
-        private ParcelRepository $parcelRepository
+        private readonly CycleRepository $cycleRepository,
+        private readonly VegetableRepository $vegetableRepository,
+        private readonly ParcelRepository $parcelRepository
     ) {
     }
 

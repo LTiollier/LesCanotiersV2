@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\VegetableCategory;
+use Illuminate\Support\Collection;
 
 class VegetableCategoryRepository
 {
@@ -10,10 +11,7 @@ class VegetableCategoryRepository
     {
     }
 
-    /**
-     * @param array<string> $relations
-     */
-    public function all(array $relations = []): \Illuminate\Support\Collection
+    public function all(array $relations = []): Collection
     {
         return $this->model
             ->with($relations)
@@ -21,9 +19,6 @@ class VegetableCategoryRepository
         ;
     }
 
-    /**
-     * @param array<mixed> $parameters
-     */
     public function store(array $parameters): VegetableCategory
     {
         $model = $this->model->newInstance();
@@ -34,9 +29,6 @@ class VegetableCategoryRepository
         return $model;
     }
 
-    /**
-     * @param array<mixed> $parameters
-     */
     public function update(VegetableCategory $vegetableCategory, array $parameters): VegetableCategory
     {
         $vegetableCategory
@@ -47,9 +39,6 @@ class VegetableCategoryRepository
         return $vegetableCategory;
     }
 
-    /**
-     * @throws \Exception
-     */
     public function delete(VegetableCategory $vegetableCategory): bool
     {
         return (bool) $vegetableCategory->delete();

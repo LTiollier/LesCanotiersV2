@@ -20,9 +20,9 @@ use Webmozart\Assert\Assert;
 class TimeController extends Controller
 {
     public function __construct(
-        private TimeRepository $timeRepository,
-        private CycleRepository $cycleRepository,
-        private ActivityRepository $activityRepository
+        private readonly TimeRepository $timeRepository,
+        private readonly CycleRepository $cycleRepository,
+        private readonly ActivityRepository $activityRepository
     ) {
     }
 

@@ -14,7 +14,7 @@ use Webmozart\Assert\Assert;
 
 class ParcelController extends Controller
 {
-    public function __construct(private ParcelRepository $parcelRepository)
+    public function __construct(private readonly ParcelRepository $parcelRepository)
     {
     }
 

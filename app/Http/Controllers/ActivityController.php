@@ -14,7 +14,7 @@ use Webmozart\Assert\Assert;
 
 class ActivityController extends Controller
 {
-    public function __construct(private ActivityRepository $activityRepository)
+    public function __construct(private readonly ActivityRepository $activityRepository)
     {
     }
 

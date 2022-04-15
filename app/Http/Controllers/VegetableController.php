@@ -17,8 +17,8 @@ use Webmozart\Assert\Assert;
 class VegetableController extends Controller
 {
     public function __construct(
-        private VegetableCategoryRepository $vegetableCategoryRepository,
-        private VegetableRepository $vegetableRepository
+        private readonly VegetableCategoryRepository $vegetableCategoryRepository,
+        private readonly VegetableRepository $vegetableRepository
     ) {
     }
 

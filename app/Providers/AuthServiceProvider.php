@@ -7,6 +7,7 @@ use App\Models\Cycle;
 use App\Models\Parcel;
 use App\Models\Time;
 use App\Models\Vegetable;
+use App\Models\VegetableCategory;
 use App\Policies\ModelForAdminPolicy;
 use App\Policies\TimePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -19,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
         Cycle::class => ModelForAdminPolicy::class,
         Parcel::class => ModelForAdminPolicy::class,
         Vegetable::class => ModelForAdminPolicy::class,
+        VegetableCategory::class => ModelForAdminPolicy::class,
     ];
 
     public function boot(): void
