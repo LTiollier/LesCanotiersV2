@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\ParcelController;
 use App\Http\Controllers\TimeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VegetableCategoryController;
 use App\Http\Controllers\VegetableController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::resources([
     'parcels' => ParcelController::class,
     'vegetables' => VegetableController::class,
     'vegetableCategories' => VegetableCategoryController::class,
+    'users' => UserController::class,
 ], [
     'except' => ['show'],
     'middleware' => ['auth'],

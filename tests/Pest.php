@@ -52,3 +52,13 @@ function actingAsEmployee(Authenticatable $user = null): TestCase
 
     return test()->actingAs($user);
 }
+
+function admin(): User
+{
+    return User::find(1);
+}
+
+function employee(): User
+{
+    return User::find(2);
+}
