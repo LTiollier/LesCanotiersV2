@@ -11,8 +11,9 @@ class UpdateUserRequest extends FormRequest
 {
     public function rules(): array
     {
-        /** @var User|null $user */
+        /** @var null|User $user */
         $user = $this->input('user');
+
         /** @var User $auth */
         $auth = Auth::user();
 

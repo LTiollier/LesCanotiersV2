@@ -15,7 +15,8 @@ class UserRepository
     {
         return $this->model
             ->with($relations)
-            ->get();
+            ->get()
+        ;
     }
 
     public function store(array $parameters): User
@@ -24,7 +25,8 @@ class UserRepository
 
         $model = $this->model->newInstance();
         $model->fill($parameters)
-            ->save();
+            ->save()
+        ;
 
         if (!empty($parameters['role'])) {
             $model->assignRole($parameters['role']);
@@ -39,7 +41,8 @@ class UserRepository
 
         $user
             ->fill($parameters)
-            ->save();
+            ->save()
+        ;
 
         if (!empty($parameters['role'])) {
             $user->assignRole($parameters['role']);

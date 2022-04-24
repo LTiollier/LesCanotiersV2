@@ -28,7 +28,7 @@ class UserController extends Controller
         $this->authorize('viewAny', User::class);
 
         return Inertia::render('User/UserIndex', [
-            'users' => $this->userRepository->all()
+            'users' => $this->userRepository->all(),
         ]);
     }
 
@@ -40,7 +40,7 @@ class UserController extends Controller
         $this->authorize('create', User::class);
 
         return Inertia::render('User/UserCreate', [
-            'roles' => User::ROLES
+            'roles' => User::ROLES,
         ]);
     }
 
@@ -68,7 +68,7 @@ class UserController extends Controller
 
         return Inertia::render('User/UserEdit', [
             'user' => UserResource::make($user),
-            'roles' => User::ROLES
+            'roles' => User::ROLES,
         ]);
     }
 
