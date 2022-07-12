@@ -15,16 +15,14 @@ class VegetableRepository
     {
         return $this->model
             ->with($relations)
-            ->get()
-        ;
+            ->get();
     }
 
     public function store(array $parameters): Vegetable
     {
         $model = $this->model->newInstance();
         $model->fill($parameters)
-            ->save()
-        ;
+            ->save();
 
         return $model;
     }
@@ -33,8 +31,7 @@ class VegetableRepository
     {
         $vegetable
             ->fill($parameters)
-            ->save()
-        ;
+            ->save();
 
         return $vegetable;
     }

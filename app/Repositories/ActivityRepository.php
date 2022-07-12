@@ -15,16 +15,14 @@ class ActivityRepository
     {
         return $this->model
             ->with($relations)
-            ->get()
-        ;
+            ->get();
     }
 
     public function store(array $parameters): Activity
     {
         $model = $this->model->newInstance();
         $model->fill($parameters)
-            ->save()
-        ;
+            ->save();
 
         return $model;
     }
@@ -33,8 +31,7 @@ class ActivityRepository
     {
         $activity
             ->fill($parameters)
-            ->save()
-        ;
+            ->save();
 
         return $activity;
     }

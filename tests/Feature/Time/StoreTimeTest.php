@@ -17,8 +17,7 @@ $dataEmployee['user_id'] = 2;
 
 it('asserts we cannot see store unauthenticated', function () use ($dataAdmin) {
     post(route('times.store'), $dataAdmin)
-        ->assertRedirect(route('login'))
-    ;
+        ->assertRedirect(route('login'));
 });
 
 it('asserts admin can store', function () use ($dataAdmin) {
@@ -26,8 +25,7 @@ it('asserts admin can store', function () use ($dataAdmin) {
 
     actingAsAdmin()
         ->post(route('times.store'), $dataAdmin)
-        ->assertOk()
-    ;
+        ->assertOk();
 
     $this->assertDatabaseHas('times', $dataAdmin);
 });
@@ -37,8 +35,7 @@ it('asserts employee can store', function () use ($dataEmployee) {
 
     actingAsEmployee()
         ->post(route('times.store'), $dataEmployee)
-        ->assertOk()
-    ;
+        ->assertOk();
 
     $this->assertDatabaseHas('times', $dataEmployee);
 });
@@ -48,8 +45,7 @@ it('asserts admin can store other', function () use ($dataEmployee) {
 
     actingAsAdmin()
         ->post(route('times.store'), $dataEmployee)
-        ->assertOk()
-    ;
+        ->assertOk();
 
     $this->assertDatabaseHas('times', $dataEmployee);
 });
@@ -59,6 +55,5 @@ it('asserts employee cannot store other', function () use ($dataAdmin) {
 
     actingAsEmployee()
         ->post(route('times.store'), $dataAdmin)
-        ->assertForbidden()
-    ;
+        ->assertForbidden();
 });

@@ -7,7 +7,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class() extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -20,16 +21,13 @@ return new class() extends Migration {
             $table->integer('quantity')->nullable();
             $table->foreignIdFor(User::class)
                 ->nullable()
-                ->constrained()
-            ;
+                ->constrained();
             $table->foreignIdFor(Cycle::class)
                 ->nullable()
-                ->constrained()
-            ;
+                ->constrained();
             $table->foreignIdFor(Activity::class)
                 ->nullable()
-                ->constrained()
-            ;
+                ->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

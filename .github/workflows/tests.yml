@@ -77,8 +77,8 @@ jobs:
           php artisan migrate:fresh --seed
           php artisan optimize:clear
 
-      - name: Execute style fix
-        run: composer run style:fix || true
+      - name: Execute Laravel Pint
+        run: composer pint
 
       - name: setup git config
         run: |
@@ -92,9 +92,6 @@ jobs:
 
       - name: Running phpstan
         run: composer run phpstan
-
-      - name: Verification des coding standards
-        run: composer run phpcs
 
       - name: Installation du projet (npm)
         run: |

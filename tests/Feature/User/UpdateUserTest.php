@@ -13,15 +13,13 @@ $data = [
 
 it('asserts we cannot update unauthenticated', function () {
     put(route('users.update', ['user' => 1]))
-        ->assertRedirect(route('login'))
-    ;
+        ->assertRedirect(route('login'));
 });
 
 it('asserts admin can update other', function () use ($data) {
     actingAsAdmin()
         ->put(route('users.update', ['user' => 2]), $data)
-        ->assertRedirect(route('users.edit', ['user' => 2]))
-    ;
+        ->assertRedirect(route('users.edit', ['user' => 2]));
 
     $this->assertDatabaseHas('users', [
         'name' => $data['name'],
@@ -32,8 +30,7 @@ it('asserts admin can update other', function () use ($data) {
 it('asserts admin can self update', function () use ($data) {
     actingAsAdmin()
         ->put(route('users.update', ['user' => 1]), $data)
-        ->assertRedirect(route('users.edit', ['user' => 1]))
-    ;
+        ->assertRedirect(route('users.edit', ['user' => 1]));
 
     $this->assertDatabaseHas('users', [
         'name' => $data['name'],
@@ -44,15 +41,13 @@ it('asserts admin can self update', function () use ($data) {
 it('asserts employee cannot update other', function () use ($data) {
     actingAsEmployee()
         ->put(route('users.update', ['user' => 1]), $data)
-        ->assertForbidden()
-    ;
+        ->assertForbidden();
 });
 
 it('asserts employee can self update', function () use ($data) {
     actingAsEmployee()
         ->put(route('users.update', ['user' => 2]), $data)
-        ->assertRedirect(route('users.edit', ['user' => 2]))
-    ;
+        ->assertRedirect(route('users.edit', ['user' => 2]));
 
     $this->assertDatabaseHas('users', [
         'name' => $data['name'],
@@ -65,8 +60,7 @@ it('asserts employee cannot update role', function () use ($data) {
 
     actingAsEmployee()
         ->put(route('users.update', ['user' => 2]), $data)
-        ->assertRedirect(route('users.edit', ['user' => 2]))
-    ;
+        ->assertRedirect(route('users.edit', ['user' => 2]));
 
     $this->assertTrue(employee()->hasExactRoles([User::EMPLOYEE_ROLE]));
 });

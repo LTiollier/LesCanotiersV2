@@ -11,8 +11,7 @@ $data = [
 
 it('asserts we cannot update unauthenticated', function () {
     put(route('times.update', ['time' => 1]))
-        ->assertRedirect(route('login'))
-    ;
+        ->assertRedirect(route('login'));
 });
 
 it('asserts admin can update', function () use ($data) {
@@ -20,8 +19,7 @@ it('asserts admin can update', function () use ($data) {
 
     actingAsAdmin()
         ->put(route('times.update', ['time' => 1]), $data)
-        ->assertOk()
-    ;
+        ->assertOk();
 
     $this->assertDatabaseHas('times', [
         'id' => 1,
@@ -36,8 +34,7 @@ it('asserts employee can update', function () use ($data) {
 
     actingAsEmployee()
         ->put(route('times.update', ['time' => 2]), $data)
-        ->assertOk()
-    ;
+        ->assertOk();
 
     $this->assertDatabaseHas('times', [
         'id' => 2,
@@ -52,8 +49,7 @@ it('asserts admin can update other', function () use ($data) {
 
     actingAsAdmin()
         ->put(route('times.update', ['time' => 2]), $data)
-        ->assertOk()
-    ;
+        ->assertOk();
 
     $this->assertDatabaseHas('times', [
         'id' => 2,
@@ -68,6 +64,5 @@ it('asserts employee cannot update other', function () use ($data) {
 
     actingAsEmployee()
         ->put(route('times.update', ['time' => 1]), $data)
-        ->assertForbidden()
-    ;
+        ->assertForbidden();
 });

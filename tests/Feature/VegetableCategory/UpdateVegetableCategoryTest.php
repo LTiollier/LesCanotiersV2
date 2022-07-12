@@ -9,8 +9,7 @@ $data = [
 
 it('asserts we cannot update unauthenticated', function () {
     put(route('vegetableCategories.update', ['vegetableCategory' => 1]))
-        ->assertRedirect(route('login'))
-    ;
+        ->assertRedirect(route('login'));
 });
 
 it('asserts admin can update', function () use ($data) {
@@ -18,8 +17,7 @@ it('asserts admin can update', function () use ($data) {
 
     actingAsAdmin()
         ->put(route('vegetableCategories.update', ['vegetableCategory' => 1]), $data)
-        ->assertOk()
-    ;
+        ->assertOk();
 
     $this->assertDatabaseHas('vegetable_categories', $data);
 });
@@ -29,6 +27,5 @@ it('asserts employee cannot update', function () use ($data) {
 
     actingAsEmployee()
         ->put(route('vegetableCategories.update', ['vegetableCategory' => 1]), $data)
-        ->assertForbidden()
-    ;
+        ->assertForbidden();
 });

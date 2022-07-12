@@ -58,8 +58,7 @@ class CreatePermissionTables extends Migration
             $table->foreign(PermissionRegistrar::$pivotPermission)
                 ->references('id')
                 ->on($tableNames['permissions'])
-                ->onDelete('cascade')
-            ;
+                ->onDelete('cascade');
             if ($teams) {
                 $table->unsignedBigInteger($columnNames['team_foreign_key']);
                 $table->index($columnNames['team_foreign_key'], 'model_has_permissions_team_foreign_key_index');
@@ -86,8 +85,7 @@ class CreatePermissionTables extends Migration
             $table->foreign(PermissionRegistrar::$pivotRole)
                 ->references('id')
                 ->on($tableNames['roles'])
-                ->onDelete('cascade')
-            ;
+                ->onDelete('cascade');
             if ($teams) {
                 $table->unsignedBigInteger($columnNames['team_foreign_key']);
                 $table->index($columnNames['team_foreign_key'], 'model_has_roles_team_foreign_key_index');
@@ -111,22 +109,19 @@ class CreatePermissionTables extends Migration
             $table->foreign(PermissionRegistrar::$pivotPermission)
                 ->references('id')
                 ->on($tableNames['permissions'])
-                ->onDelete('cascade')
-            ;
+                ->onDelete('cascade');
 
             $table->foreign(PermissionRegistrar::$pivotRole)
                 ->references('id')
                 ->on($tableNames['roles'])
-                ->onDelete('cascade')
-            ;
+                ->onDelete('cascade');
 
             $table->primary([PermissionRegistrar::$pivotPermission, PermissionRegistrar::$pivotRole], 'role_has_permissions_permission_id_role_id_primary');
         });
 
         app('cache')
             ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
-            ->forget(config('permission.cache.key'))
-        ;
+            ->forget(config('permission.cache.key'));
     }
 
     /**

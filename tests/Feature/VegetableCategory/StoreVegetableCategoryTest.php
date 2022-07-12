@@ -9,8 +9,7 @@ $data = [
 
 it('asserts we cannot see store unauthenticated', function () use ($data) {
     post(route('vegetableCategories.store'), $data)
-        ->assertRedirect(route('login'))
-    ;
+        ->assertRedirect(route('login'));
 });
 
 it('asserts admin can store', function () use ($data) {
@@ -18,8 +17,7 @@ it('asserts admin can store', function () use ($data) {
 
     actingAsAdmin()
         ->post(route('vegetableCategories.store'), $data)
-        ->assertOk()
-    ;
+        ->assertOk();
 
     $this->assertDatabaseHas('vegetable_categories', $data);
 });
@@ -29,6 +27,5 @@ it('asserts employee cannot store', function () use ($data) {
 
     actingAsEmployee()
         ->post(route('vegetableCategories.store'), $data)
-        ->assertForbidden()
-    ;
+        ->assertForbidden();
 });

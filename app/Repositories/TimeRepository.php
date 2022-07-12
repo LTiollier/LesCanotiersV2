@@ -15,16 +15,14 @@ class TimeRepository
     {
         return $this->model
             ->with($relations)
-            ->get()
-        ;
+            ->get();
     }
 
     public function store(array $parameters): Time
     {
         $model = $this->model->newInstance();
         $model->fill($parameters)
-            ->save()
-        ;
+            ->save();
 
         return $model;
     }
@@ -33,8 +31,7 @@ class TimeRepository
     {
         $time
             ->fill($parameters)
-            ->save()
-        ;
+            ->save();
 
         return $time;
     }

@@ -14,7 +14,7 @@ class CycleSeeder extends Seeder
         $vegetables = \App\Models\Vegetable::all();
         $parcels = \App\Models\Parcel::all();
 
-        for ($i = 1; $i <= 10; ++$i) {
+        for ($i = 1; $i <= 10; $i++) {
             \App\Models\Cycle::factory([
                 'id' => $i,
                 'starts_at' => now()->subMonth(),
